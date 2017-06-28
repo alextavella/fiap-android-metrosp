@@ -24,9 +24,11 @@ import butterknife.ButterKnife;
 public class LinhaAdapter extends RecyclerView.Adapter<LinhaAdapter.LinhaViewHolder> {
 
     private List<Linha> linhas;
+    private OnItemClickListener listener;
 
-    public LinhaAdapter(List<Linha> linhas) {
+    public LinhaAdapter(List<Linha> linhas, OnItemClickListener listener) {
         this.linhas = linhas;
+        this.listener = listener;
     }
 
     @Override
@@ -37,18 +39,25 @@ public class LinhaAdapter extends RecyclerView.Adapter<LinhaAdapter.LinhaViewHol
     }
 
     @Override
-    public void onBindViewHolder(LinhaViewHolder holder, int position) {
+    public void onBindViewHolder(LinhaViewHolder holder, final int position) {
         holder.tvTitle
                 .setText(linhas.get(position).getCor());
 
         holder.tvSubTitle
-                .setText(String.valueOf("Linha "+ linhas.get(position).getNumero()));
+                .setText(String.valueOf("Linha " + linhas.get(position).getNumero()));
 
 //        Picasso
 //                .with(holder.itemView.getContext())
 //                .load(linhas.get(position).getUrlImagem())
 //                .placeholder(R.drawable.img_metro_placeholder)
 //                .into(holder.ivLinha);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onItemClick(linhas.get(position));
+            }
+        });
     }
 
     @Override

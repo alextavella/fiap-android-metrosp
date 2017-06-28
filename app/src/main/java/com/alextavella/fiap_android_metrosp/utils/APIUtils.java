@@ -1,6 +1,6 @@
 package com.alextavella.fiap_android_metrosp.utils;
 
-import com.alextavella.fiap_android_metrosp.api.LinhaAPI;
+import com.alextavella.fiap_android_metrosp.api.MetroAPI;
 import com.alextavella.fiap_android_metrosp.api.RetrofitClient;
 
 /**
@@ -11,9 +11,9 @@ public class APIUtils {
 
     public static final String BASE_URL = "http://172.16.71.45:3000";
 
-    public static LinhaAPI getAndroidAPIService() {
+    public static MetroAPI getAndroidAPIService() {
         return RetrofitClient
                 .getClient(BASE_URL)
-                .create(LinhaAPI.class);
+                .create(MetroAPI.class);
     }
 }

@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/margin"
-    android:layout_marginBottom="@dimen/margin"
+    android:layout_marginBottom="@dimen/margin_item"
+    android:layout_marginTop="@dimen/margin_item"
     android:orientation="vertical">
 
     <LinearLayout
@@ -29,14 +29,14 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorPrimary"
                 android:textSize="20dp"
-                tools:text="AZUL"/>
+                tools:text="AZUL" />
 
             <TextView
                 android:id="@+id/tvSubTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorSecondary"
-                tools:text="1"/>
+                tools:text="1" />
         </LinearLayout>
 
     </LinearLayout>

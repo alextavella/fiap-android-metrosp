@@ -12,7 +12,7 @@ import retrofit2.http.GET;
  * Created by alextavella on 26/06/17.
  */
 
-public interface LinhaAPI {
+public interface MetroAPI {
 
     @GET("/linhas")
     Call<List<Linha>> listLinha();

@@ -2,13 +2,14 @@ package com.alextavella.fiap_android_metrosp;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.alextavella.fiap_android_metrosp.adapter.LinhaAdapter;
-import com.alextavella.fiap_android_metrosp.api.LinhaAPI;
+import com.alextavella.fiap_android_metrosp.adapter.OnItemClickListener;
+import com.alextavella.fiap_android_metrosp.api.MetroAPI;
 import com.alextavella.fiap_android_metrosp.model.Linha;
 import com.alextavella.fiap_android_metrosp.utils.APIUtils;
 
@@ -27,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     public RecyclerView rvLinhas;
 
     private LinhaAdapter linhaAdapter;
-    private LinhaAPI linhaAPI;
+    private MetroAPI linhaAPI;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +40,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void init() {
-        linhaAdapter = new LinhaAdapter(new ArrayList<Linha>());
+
+        linhaAdapter = new LinhaAdapter(new ArrayList<Linha>(), new OnItemClickListener() {
+            @Override
+            public void onItemClick(Linha item) {
+                Toast.makeText(getApplicationContext(), item.getCor(), Toast.LENGTH_SHORT).show();
+            }
+        });
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         rvLinhas.setLayoutManager(layoutManager);
