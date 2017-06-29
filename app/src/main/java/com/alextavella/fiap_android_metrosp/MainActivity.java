@@ -1,5 +1,6 @@
 package com.alextavella.fiap_android_metrosp;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,6 +14,7 @@ import com.alextavella.fiap_android_metrosp.api.MetroAPI;
 import com.alextavella.fiap_android_metrosp.model.Linha;
 import com.alextavella.fiap_android_metrosp.utils.APIUtils;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,9 +28,8 @@ public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.rvLinhas)
     public RecyclerView rvLinhas;
-
+    
     private LinhaAdapter linhaAdapter;
-    private MetroAPI linhaAPI;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,12 +42,15 @@ public class MainActivity extends AppCompatActivity {
 
     private void init() {
 
-        linhaAdapter = new LinhaAdapter(new ArrayList<Linha>(), new OnItemClickListener() {
-            @Override
-            public void onItemClick(Linha item) {
-                Toast.makeText(getApplicationContext(), item.getCor(), Toast.LENGTH_SHORT).show();
-            }
-        });
+        linhaAdapter = new LinhaAdapter(new ArrayList<Linha>(),
+                new OnItemClickListener() {
+                    @Override
+                    public void onItemClick(Linha linha) {
+                        Intent intentMaps = new Intent(MainActivity.this, MapsActivity.class);
+                        intentMaps.putExtra("LINHA", linha);
+                        startActivity(intentMaps);
+                    }
+                });
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         rvLinhas.setLayoutManager(layoutManager);

@@ -1,10 +1,15 @@
 package com.alextavella.fiap_android_metrosp.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.io.Serializable;
+
 /**
  * Created by alextavella on 26/06/17.
  */
 
-public class Linha {
+public class Linha implements Parcelable {
 
     private String cor;
     private int numero;
@@ -15,6 +20,24 @@ public class Linha {
         this.numero = numero;
         this.urlImagem = urlImagem;
     }
+
+    public Linha(Parcel in) {
+        this.cor = in.readString();
+        this.numero = in.readInt();
+        this.urlImagem = in.readString();
+    }
+
+    public static final Creator<Linha> CREATOR = new Creator<Linha>() {
+        @Override
+        public Linha createFromParcel(Parcel in) {
+            return new Linha(in);
+        }
+
+        @Override
+        public Linha[] newArray(int size) {
+            return new Linha[size];
+        }
+    };
 
     public String getCor() {
         return cor;
@@ -38,5 +61,17 @@ public class Linha {
 
     public void setUrlImagem(String urlImagem) {
         this.urlImagem = urlImagem;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(cor);
+        dest.writeInt(numero);
+        dest.writeString(urlImagem);
     }
 }
